@@ -17,9 +17,13 @@ Give random input to the GPIOIN[15:0], set other parameter(addr, sel...) correct
 - when GPIO receive data from AHB, check if the parity bit matches with the data
 #### Timing Verification
 After the start-up stage, output always appears at one cycles behind the input.
+
+#### Constrained Randomisation
+
+
+is it required?
 #### Mode Changing
 There should not be any bugs, when changing the transmission mode, between 3 stage, reset, send ,receive.
 So test 2 different sets.
 - reset - send - receive - reset
 - reset - receive - send - reset
-#### Constrained Randomisation
