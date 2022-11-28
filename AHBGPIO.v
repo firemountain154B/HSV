@@ -57,10 +57,16 @@ module AHBGPIO(
   );
 
 //Parity Check
-  wire    check1, check2;
-  assign  check1 = ^(GPIOOUT[15:0]);
-  assign  check2 = ~check1;
-  assign  GPIOOUT[16] = PARITYSEL? check2 : check1;
+  reg gpio_datain_16;
+  always @(posedge HCLK, negedge HRESETn)
+  begin
+    if(!HRESETn)
+      gpio_datain_16 <= 0;
+    else
+      gpio_datain_16 <= PARITYSEL? ~(^(GPIOOUT[15:0])) : ^(GPIOOUT[15:0]);
+  end
+  assign  GPIOOUT[16] = gpio_datain_16;
+
 
   wire    Result;
   assign  Result = PARITYSEL? (~(^GPIOIN[15:0])): ^GPIOIN[15:0];
