@@ -22,12 +22,12 @@ program automatic test(router_io.TB router_io);
     initial begin
         reset();
         fork
-            send(parity1,rdata);
-            check_send(parity1,rdata);
+            send(p);
+            check_send(p);
         join_any
         reset();
         fork
-            receive();
+            receive(p);
             check_recieve();
         join
         reset();
@@ -52,29 +52,27 @@ program automatic test(router_io.TB router_io);
             @(router_io.cb);
     endtask: reset
 // send
-    task send(output parity1,output [15:0] rdata);
+    task send(ref Packet p);
         dir_addr();
         send_dir(.model(1));
         repeat(5) 
-            send_data(parity1, rdata);
+            send_data(p);
     endtask: send
 
-    task send_data(output parity1, output [15:0] rdata);
+    task automatic send_data(ref Packet p);
         p = new();
         p.paritygen;
 
         assert(p.randomize) else $fatal;
-        parity1 = p.tparity;
-        rdata   = p.rdata;
 
         router_io.cb.HWDATA     <=  {16'h0,p.rdata};
         @(router_io.cb);
     endtask: send_data
 
-    task automatic check_send(input parity1, input [15:0] rdata);
+    task automatic check_send(ref Packet p);
         forever begin
-            reg [15:0] reg_rdata;
-            reg_rdata = rdata;
+            logic [15:0] reg_rdata;
+            reg_rdata = p.rdata;
             $display("befor detect:", router_io.cb.GPIOOUT);
             $display("reg_rdata = %0h", reg_rdata);
             @(router_io.cb.GPIOOUT);
@@ -87,15 +85,15 @@ program automatic test(router_io.TB router_io);
     endtask : check_send
 
 // receive
-    task receive();
+    task receive(ref Packet p);
         dir_addr();
         receive_dir(.model(0));
         repeat(5) 
-            receive_data();
-        recevie_bug();
+            receive_data(p);
+        recevie_bug(p);
     endtask: receive
 
-    task receive_data();
+    task receive_data(ref Packet p);
         p = new();
         p.paritygen();
         assert(p.randomize) else $fatal;
@@ -103,7 +101,7 @@ program automatic test(router_io.TB router_io);
         @(router_io.cb); 
     endtask: receive_data
 
-    task recevie_bug();
+    task recevie_bug(ref Packet p);
         p = new(1);
         p.paritygen();
         assert(p.randomize) else $fatal;
