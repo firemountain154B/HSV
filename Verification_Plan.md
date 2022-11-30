@@ -22,8 +22,16 @@ After the start-up stage, output always appears at one cycles behind the input.
 
 
 is it required?
-#### Mode Changing
+(#### Mode Changing
 There should not be any bugs, when changing the transmission mode, between 3 stage, reset, send ,receive.
 So test 2 different sets.
 - reset - send - receive - reset
-- reset - receive - send - reset
+- reset - receive - send - reset)
+
+### VGA
+Verify the correct behavior of VGA, especially a checker for character display. Then inject bug for DLS check.
+#### Character display
+
+
+
+#### Bug Inject
