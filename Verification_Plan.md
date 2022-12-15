@@ -1,6 +1,13 @@
 # Hardware and Software Acceleration Verification Plan
 ## Peripheral Part
 ### GPIO
+checker()
+  the GPIO outputs the correct value and reads back correctly what is on its input
+  parity generation and checking works correctly
+
+Inject Faults
+  at outside set the reverse parity model.
+  
 #### Goal
 Verify the correct behavior of GPIO, especially when it operates at the AHB to GPIO and GPIO to AHB model. Test its parity check function. 
 #### Properties
@@ -31,7 +38,14 @@ So test 2 different sets.
 ### VGA
 Verify the correct behavior of VGA, especially a checker for character display. Then inject bug for DLS check.
 #### Character display
+Write a monitor to check the output information, whether it can output the correct signal, and display it.
+
+#### Timing check
+check whether the HSYNC and YSYNC signal generate appropriately and thentext display in the correct region.
+
+#### DLS error
+giving random to DLS unit, then give a bug in another unit, can check the DLS error is correct or not output successfully. 
 
 
 
-#### Bug Inject
+
