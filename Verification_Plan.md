@@ -1,31 +1,31 @@
 # Hardware and Software Acceleration Verification Plan
 ## Peripheral Part
 ### GPIO
-checker()
-  the GPIO outputs the correct value and reads back correctly what is on its input
-  parity generation and checking works correctly
-
-Inject Faults
-  at outside set the reverse parity model.
-  
 #### Goal
-Verify the correct behavior of GPIO, especially when it operates at the AHB to GPIO and GPIO to AHB model. Test its parity check function. 
+Verify the properties of GPIO, especially when it operates at the AHB to GPIO and GPIO to AHB model. Test its parity check function. 
 #### Properties
 ##### Receive Data
-Give random input to the HWDATA, set other parameter(addr, sel...) correctly, test 
-- the direction signal correctly set
-- the GPIOOUT[15:0] signal is the same with input
+- HADDR = ADDR_DIR
+- HADDR = ADDR_DATA, HWDATA = DIR_RECEIVE
+- GPIOIN = DATA
 ##### Send Data
-Give random input to the GPIOIN[15:0], set other parameter(addr, sel...) correctly, test  
-- the direction signal correctly set
-- the HRDATA[15:0] signal is the same as input
+- send HADDR = ADDR_DIR
+- HADDR = ADDR_DATA, HWDATA = DIR_SEND
+- HWDATA = DATA
 #### Parity Generate/Check
 - when GPIO sends data to AHB, generate an additional parity bit
 - when GPIO receive data from AHB, check if the parity bit matches with the data
 #### Timing Verification
-After the start-up stage, output always appears at one cycles behind the input.
 
-#### Constrained Randomisation
+### Ways
+#### Properties Check
+Give random DATA input to the GPIOIN[15:0]/HWDATA, set other parameter(addr, sel...) correctly.
+
+Checker part, used to check the correct Timing Specification, and the correct parity function.
+
+#### Inject Bug
+
+When checking the reciving function, deliberately set the parrity bit wrong, then check whether the GPIO can give bug.
 
 
 is it required?
