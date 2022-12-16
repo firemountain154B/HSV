@@ -1,5 +1,5 @@
 # Hardware and Software Acceleration Verification Plan
-## Peripheral Part
+## Behavior Check for VGA and GPIO
 ### GPIO
 #### Goal
 Verify the properties of GPIO, especially when it operates at the AHB to GPIO and GPIO to AHB model. Test its parity check function. 
@@ -47,6 +47,20 @@ Write a monitor to check the output information, whether it can output the corre
 
 ##### Inject Bug
 Deliberately set the the redundant AHBVGA with different input data, check whether the DLS_ERROR can give out successfully.s
+
+## Formal Verification 
+### GPIO
+### VGA
+
+## Code and Function Coverage
+### GPIO
+### VGA
+
+## SYSTEM
+Write assembly code which can provide two funcitions
+- receive/send data for GPIO
+- send data to VGA
+- monitor which can provide the output for VGA
 
 
 
