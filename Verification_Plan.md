@@ -24,28 +24,29 @@ Give random DATA input to the GPIOIN[15:0]/HWDATA, set other parameter(addr, sel
 Checker part, used to check the correct Timing Specification, and the correct parity function.
 
 #### Inject Bug
-
 When checking the reciving function, deliberately set the parrity bit wrong, then check whether the GPIO can give bug.
 
-
-is it required?
-(#### Mode Changing
-There should not be any bugs, when changing the transmission mode, between 3 stage, reset, send ,receive.
-So test 2 different sets.
-- reset - send - receive - reset
-- reset - receive - send - reset)
-
 ### VGA
-Verify the correct behavior of VGA, especially a checker for character display. Then inject bug for DLS check.
-#### Character display
+Verify the correct properties of VGA, especially a checker for character display. Then inject bug for DLS check.
+#### Properties
+##### Character Display
+Give a random HWDATA, set other parameter correctly
+- HSYNC will give the a zero pulse to start the line
+- Vertical sync will give a zero pulse to start a new frame
+- all the text will display in the display region
+##### DLS
+When the ouput is different between AHBVGA and AHBVGA_redundant, will give a DLS_ERROR output.
 Write a monitor to check the output information, whether it can output the correct signal, and display it.
 
-#### Timing check
-check whether the HSYNC and YSYNC signal generate appropriately and thentext display in the correct region.
+#### Ways
+##### Properties Check
+- Give random 2 frame input to HWDATA, set other parameter(addr, sel...) correctly.
+- check whether the VGA can give two frame output, 
+- check when in the display region ,there will always be valid data.
+- print the output to a file
 
-#### DLS error
-giving random to DLS unit, then give a bug in another unit, can check the DLS error is correct or not output successfully. 
-
+##### Inject Bug
+Deliberately set the the redundant AHBVGA with different input data, check whether the DLS_ERROR can give out successfully.s
 
 
 
