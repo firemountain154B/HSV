@@ -50,12 +50,24 @@ Deliberately set the the redundant AHBVGA with different input data, check wheth
 
 ## Formal Verification 
 ### GPIO
+Use assumption to make sure, the GPIO can have input of the correct timing specification
+- how to assume..
+Use assert to check whether the output and input can match each other.
+- assert HWDATA = GPIOOUT
+- assert HRDATA = GPIOIN
 ### VGA
-
+Use assumption to make sure,input is valid
+- how to assume..
+Use cover to check the output data
+- RGB can output the correct operation
 ## Code and Function Coverage
 ### GPIO
+creat 1 coverage
+- HWDATA(bin 0 1)(cover input and output)
+get the report
 ### VGA
-
+creat 1 coverage
+- HWDATA(bin [0:7f]) (cover all the input)
 ## SYSTEM
 Write assembly code which can provide two funcitions
 - receive/send data for GPIO
