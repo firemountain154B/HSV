@@ -48,18 +48,20 @@ Write a monitor to check the output information, whether it can output the corre
 ##### Inject Bug
 Deliberately set the the redundant AHBVGA with different input data, check whether the DLS_ERROR can give out successfully.s
 
+
 ## Formal Verification 
 ### GPIO
-Use assumption to make sure, the GPIO can have input of the correct timing specification
+Use assumption to limit the input space
 - how to assume..
-Use assert to check whether the output and input can match each other.
-- assert HWDATA = GPIOOUT
-- assert HRDATA = GPIOIN
+Use assert to check the correct behavior of GPIO
+- assert when set the dir 1'b1 HWDATA |=> GPIOOUT
+- assert when set the dir 1'b0 GPIOIN |=> HRDATA
 ### VGA
 Use assumption to make sure,input is valid
-- how to assume..
+- 
 Use cover to check the output data
 - RGB can output the correct operation
+
 ## Code and Function Coverage
 ### GPIO
 creat 1 coverage
@@ -68,11 +70,13 @@ get the report
 ### VGA
 creat 1 coverage
 - HWDATA(bin [0:7f]) (cover all the input)
+
 ## SYSTEM
 Write assembly code which can provide two funcitions
-- receive/send data for GPIO
+- send data for GPIO
 - send data to VGA
-- monitor which can provide the output for VGA
+
+Then check the monitor which can provide the output for VGA
 
 
 
