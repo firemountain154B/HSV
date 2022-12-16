@@ -52,7 +52,6 @@ Deliberately set the the redundant AHBVGA with different input data, check wheth
 ## Formal Verification 
 ### GPIO
 Use assumption to limit the input space
-- how to assume..
 Use assert to check the correct behavior of GPIO
 - assert when set the dir 1'b1 HWDATA |=> GPIOOUT
 - assert when set the dir 1'b0 GPIOIN |=> HRDATA
