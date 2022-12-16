@@ -4,7 +4,7 @@
 In this courework, the main goal is to use verification tool to verify AHBGPIO and VGA using a variety of tools, including checking the simulation wave, code/functional coverage, SVA for formal verification. 
 
 ### The main verification flow
-In most of the work, I started from understanding the timing specification of a peripheral first, then giving random input, always there will be several bugs, and checking the waveform and related code, get the correctly final output. So I flow the instruction of link here(The Structure o f testbech reference) [https://blog.csdn.net/weixin_42493102/article/details/121217275], 
+In most of the work, I started from understanding the timing specification of a peripheral first, then giving random input, always there will be several bugs, and checking the waveform and related code, get the correctly final output. So I flow the instruction of link here[The Structure o f testbech reference] (https://blog.csdn.net/weixin_42493102/article/details/121217275), 
 
 ### 
 
